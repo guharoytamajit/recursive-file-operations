@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.model.Calculator;
 
-public class Advice5Test extends BaseTest {
+public class LoggingTest extends BaseTest {
 	@Autowired
 	private Calculator calculator;
 

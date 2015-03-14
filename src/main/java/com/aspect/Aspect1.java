@@ -1,8 +1,6 @@
 package com.aspect;
 
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -75,15 +73,4 @@ public class Aspect1 {
 		System.out.println("called before collarAcceptor()");
 	}
 
-	@Around("@annotation(com.annotation.Logger)")
-	public int advice5(ProceedingJoinPoint proceedingJoinPoint)
-			throws Throwable {
-		int sum = 0;
-		System.out.println("called before add");
-		// here you can change the input parameters like this
-		sum = (Integer) proceedingJoinPoint.proceed(new Object[] {
-				new Integer(7), new Integer(7) });
-		System.out.println("called after add");
-		return sum;
-	}
 }
