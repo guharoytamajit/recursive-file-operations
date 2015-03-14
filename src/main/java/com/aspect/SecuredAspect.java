@@ -15,7 +15,8 @@ import com.annotation.Secured;
 public class SecuredAspect {
 
 	@Around("@annotation(com.annotation.Secured)")
-	public void authorize(ProceedingJoinPoint joinPoint) throws Throwable {
+	public Object authorize(ProceedingJoinPoint joinPoint) throws Throwable {
+		Object proceed = null;
 		String currentUserRole = getCurrentUserRole();
 		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 		Method method = signature.getMethod();
@@ -23,14 +24,15 @@ public class SecuredAspect {
 		String role = secured.role();
 		if (currentUserRole.equals(role)) {
 			System.out.println("authorized user");
-			joinPoint.proceed();
+			proceed = joinPoint.proceed();
 		} else {
 			System.out.println("unauthorized user");
 		}
+		return proceed;
 	}
 
 	public String getCurrentUserRole() {
 		// here you will generally lookup from UserContext
-		return "user";
+		return "admin";
 	}
 }
